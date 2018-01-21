@@ -7,20 +7,26 @@ import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.JOptionPane;
 
 
 public class Code4Life {
-	/*
-     * Ask the user how many hours they spent coding this week.
-     * 
-     * 1. If it's 3 or more, tell them they're a Code Ninja.
-     * 
-     * 2. If it's less than 2, tell them to stop watching YouTube and write code instead.
-     * 
-     * 3. If it's more than 5, play the Batman theme song.
-     */
-
-
+	public static void main(String[] args) {
+		
+	
+    
+String answer = JOptionPane.showInputDialog("How many hours did you program this week?");
+int me = Integer.parseInt(answer);{
+if(me<=2) {
+	JOptionPane.showMessageDialog(null, "Stop watching youtube amd write a code to do that for you.");
+}else if(me<=5) {
+	JOptionPane.showMessageDialog(null, "You are a code Ninja");
+}else {
+	playBatmanTheme();
+}
+	
+}
+	}
     private static void playBatmanTheme() {
     	try {
    		 Clip clip = AudioSystem.getClip();
