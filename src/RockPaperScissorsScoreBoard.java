@@ -1,6 +1,8 @@
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -10,8 +12,8 @@ public class RockPaperScissorsScoreBoard {
 	public static void main(String[] args) throws IOException {
 		// inside of main
 		Scanner scn = new Scanner(System.in);
-		FileWriter flw = new FileWriter("score.txt");
-		FileReader flr = new FileReader("score.txt");
+		
+		Scanner scan = new Scanner(new File("score.txt"));
 		HashMap<String, Integer> scores = new HashMap<String, Integer>();
 		JOptionPane.showMessageDialog(null, "Welcome to score board");
 		// JOptionPane.showMessageDialog(null, "To use this program type in someone's
@@ -19,7 +21,28 @@ public class RockPaperScissorsScoreBoard {
 		// JOptionPane.showMessageDialog(null,"If a person wins in the finals, \nput the
 		// word \"win\"+space in front of their \nname to give them 2 points");
 		// JOptionPane.showMessageDialog(null, "Type \"stop\" to stop the program");
+		int j = 0;
+		int start = 0;
+		int add =  0;
+		
+		if(scan.hasNextLine()) {
+		while(scan.hasNextLine()) {
+			String line = scan.nextLine();
+			
+			for (j = 0; j < line.length(); j++) {
+				if (line.charAt(j) == ' ') {
+					break;
+				}
 
+			}
+			start = j;
+			System.out.println(line);
+			add = Integer.parseInt(line.substring(0, start));
+			
+			scores.put(line.substring(start+1) ,add);
+			
+		}
+		}
 		while (0 == 0) {
 			String nextLine = scn.nextLine();
 			if (nextLine.equals("stop")) {
@@ -32,8 +55,8 @@ public class RockPaperScissorsScoreBoard {
 				}
 
 			}
-			int start = i;
-			int add = Integer.parseInt(nextLine.substring(0, start));
+			start = i;
+			add = Integer.parseInt(nextLine.substring(0, start));
 
 			if (scores.containsKey(nextLine.substring(start + 1))) {
 				scores.put(nextLine.substring(start + 1), scores.get(nextLine.substring(start + 1)) + add);
@@ -62,13 +85,14 @@ public class RockPaperScissorsScoreBoard {
 			// }
 
 		}
-
+		PrintWriter flw = new PrintWriter(new FileWriter("score.txt"));
 		System.out.println(scores);
+		
 		for (String name : scores.keySet()) {
-			flw.write(scores.get(name) + " " + name);
+			flw.println(scores.get(name) + " " + name);
 
 		}
-
+flw.close();
 		// inside of main
 	}
 	// outside of main
